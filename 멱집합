@@ -1,7 +1,5 @@
 public class Powerset {
-
-//	private static char data[] = {'a','b','c','d','e','f'};
-	private static char data[] = {'a','b'};
+	private static char data[] = {'a','b','c','d','e','f'};
 	private static int n = data.length;
 	private static boolean [] include = new boolean[n];
 	
