@@ -1,0 +1,37 @@
+// Level 별 List를 return
+
+  public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode(int x) { val = x; }
+  }
+  
+   class Solution {
+       public List<List<Integer>> levelOrderBottom(TreeNode root) {
+           List<List<Integer>> ret = new ArrayList<>();
+           //예외 케이스
+           if(root == null) return ret; 
+           
+           //Queue 만들고 node 넣고
+           Queue<TreeNode> q = new LinkedList<>();
+           q.offer(root);
+           
+           //Queue가 빌 때까지 반복
+           while(!q.isEmpty()){
+              List<Integer> level = new ArrayList<>();
+              int size = q.size();
+              
+              for(int i = 0 ; i < size ; i ++) {
+                 TreeNode node = q.poll();
+                 level.add(node.val);
+                 if(node.left != null) q.offer(node.left);
+                 if(node.right != null) q.offer(node.right);
+              }
+
+              ret.add(level);
+           }
+           
+           return ret;
+       }
+   }
