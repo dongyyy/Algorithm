@@ -19,5 +19,71 @@ BFS(Breath First Search) 방식
 
 백준 : https://www.acmicpc.net/problem/2178
 권오흠 : https://www.youtube.com/watch?v=16SLOYDCYuc
-소스 참고 : https://noinkim.tistory.com/4
 
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Maze {
+	
+    static int[][] map = {
+			{1,0,1,1,1,1},
+			{1,0,1,0,1,0},
+			{1,0,1,0,1,1},
+			{1,1,1,0,1,1}
+	};
+    
+    static int M = 4;	//세로
+    static int N = 6;	//가로     
+    
+    static boolean[][] 	visited = new boolean[M][N]; //방문 여부 확인
+  
+	public static void main(String[] args) {
+		
+		bfs(0,0);
+		
+	}
+	
+	static public void bfs(int x, int y) {
+		int dx[] = {1,0,-1,0};
+		int dy[] = {0,1,0,-1};
+		
+		Queue<Point> queue = new LinkedList<>();
+		
+		queue.offer(new Point(0,0,1));
+		visited[0][0] = true;
+		
+		while(!queue.isEmpty()) {
+			Point point = queue.poll();
+			if(point.x == M-1 && point.y == N-1) { //도착지
+				System.out.println(point.depth);
+				return;
+			}
+			
+			for(int i = 0 ; i < 4 ; i++) {
+				int xx = dx[i] + point.x;
+				int yy = dy[i] + point.y;
+				
+				//맵 범위 안, 방문한적 없는, 길 
+				if(xx >= 0 && xx < M && yy >= 0 && yy < N
+						&& visited[xx][yy] == false
+						&& map[xx][yy] == 1) {
+					visited[xx][yy] = true;
+					int p = point.depth + 1;
+//					System.out.println(xx + " " + yy + " " + p);
+					queue.offer(new Point(xx, yy, point.depth + 1));
+				}
+			}
+		}
+	}
+	
+	static class Point{
+		int x, y, depth;
+		Point(int x, int y, int depth){
+			this.x = x;
+			this.y = y;
+			this.depth = depth;
+		}
+	}
+
+}
