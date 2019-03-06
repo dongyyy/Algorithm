@@ -1,4 +1,4 @@
-미로 찾기 구현 방법
+[미로 찾기 구현 방법]
 
 BFS(Breath First Search) 방식
 * Queue 이용
